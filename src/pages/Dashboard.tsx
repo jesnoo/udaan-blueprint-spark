@@ -139,7 +139,7 @@ const Dashboard = () => {
                 <Lock className="w-4 h-4 absolute -top-1 -right-1 text-muted-foreground" />
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold">Mock Phone Calls with AI</h4>
+                <h4 className="font-semibold">Mock Phone Call Practice</h4>
                 <p className="text-sm text-muted-foreground">Unlocks in Week 6</p>
               </div>
             </div>

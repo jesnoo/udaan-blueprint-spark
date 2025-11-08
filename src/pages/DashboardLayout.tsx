@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-import { LayoutDashboard, BookOpen, Briefcase, FileText } from "lucide-react";
+import { LayoutDashboard, BookOpen, Briefcase, FileText, User } from "lucide-react";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ const DashboardLayout = () => {
     { icon: BookOpen, label: "My Learning", path: "/dashboard/learning" },
     { icon: Briefcase, label: "Jobs", path: "/dashboard/jobs" },
     { icon: FileText, label: "Resume", path: "/dashboard/resume" },
+    { icon: User, label: "Profile", path: "/dashboard/profile" },
   ];
 
   const isActive = (path: string) => {
@@ -46,13 +47,16 @@ const DashboardLayout = () => {
         </div>
 
         <div className="absolute bottom-0 p-6 w-[200px]">
-          <div className="flex items-center gap-3">
+          <div 
+            className="flex items-center gap-3 cursor-pointer hover:bg-muted p-2 rounded-lg transition-colors"
+            onClick={() => navigate("/dashboard/profile")}
+          >
             <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
               R
             </div>
             <div>
               <p className="text-sm font-medium">Raj Kumar</p>
-              <p className="text-xs text-muted-foreground cursor-pointer hover:underline">
+              <p className="text-xs text-muted-foreground">
                 View Profile
               </p>
             </div>

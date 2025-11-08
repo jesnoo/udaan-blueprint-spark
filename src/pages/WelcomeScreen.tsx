@@ -17,7 +17,7 @@ const WelcomeScreen = () => {
           <h1 className="text-[40px] font-semibold text-primary mb-2">Udaan</h1>
           <div className="space-y-4">
             <h2 className="text-[32px] font-semibold text-foreground leading-tight">
-              Your AI Career Coach
+              Your Career Coach
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Transform your skills into the office job you deserve - in weeks, not years
@@ -47,9 +47,9 @@ const WelcomeScreen = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-lg bg-primary/10">
               <Zap className="w-8 h-8 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-foreground">AI-Powered Learning</h3>
+            <h3 className="text-xl font-semibold text-foreground">Personalized Learning</h3>
             <p className="text-sm text-muted-foreground">
-              Personalized lessons that adapt to your schedule and pace
+              Lessons that adapt to your schedule and pace
             </p>
           </div>
 

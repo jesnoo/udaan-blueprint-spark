@@ -45,7 +45,7 @@ const OnboardingChat = () => {
       setMessages([
         {
           type: "ai",
-          text: "Namaste! 👋 Main aapka AI career coach hoon. Let's understand where you are today and where you want to go.",
+          text: "Namaste! 👋 I'm your career coach. Let's understand where you are today and where you want to go.",
           timestamp: "Just now",
         },
       ]);

@@ -11,7 +11,7 @@ type ChatMessage = {
   timestamp: string;
 };
 
-const LearningExperience = () => {
+const LearningLesson2 = () => {
   const navigate = useNavigate();
   const [userAnswer, setUserAnswer] = useState("");
   const [isChecking, setIsChecking] = useState(false);
@@ -19,7 +19,7 @@ const LearningExperience = () => {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
       type: "ai",
-      text: "I'm here to help! Ask me anything about professional emails and subject lines.",
+      text: "I'm here to help! Ask me anything about writing professional email body content.",
       timestamp: "Just now",
     },
   ]);
@@ -32,15 +32,15 @@ const LearningExperience = () => {
   }, [chatMessages, isTyping]);
 
   const exampleQuestions = [
-    "What if I need urgent leave?",
-    "How to address my boss?",
-    "Email format example?",
+    "How long should an email be?",
+    "Can I use informal language?",
+    "How to close an email?",
   ];
 
   const aiResponses: { [key: string]: string } = {
-    "urgent": "Good question! For urgent leave, your subject should show urgency:\n\nInstead of: 'Leave Request'\nTry: 'Urgent: Sick Leave Request for Today'\n\nKey words to use:\n• Urgent\n• Today/Tomorrow\n• Emergency\n\nWant to practice writing one?",
-    "boss": "In emails to your manager, use:\n\nFormal: 'Dear Mr./Ms. [Last Name]'\nSemi-formal: 'Hello [First Name]' (if company culture is casual)\n\nAlways start with a greeting and end with:\n• 'Best regards,'\n• 'Thank you,'\n• 'Sincerely,'\n\nThen your name.",
-    "format": "Here's a professional email format:\n\n[Subject Line]\nClear and specific (under 10 words)\n\n[Greeting]\nDear/Hello [Name],\n\n[Opening]\nState your purpose in first line\n\n[Body]\nProvide details (2-3 short paragraphs)\n\n[Closing]\nRequest/Call to action\n\n[Sign-off]\nBest regards,\n[Your Name]",
+    "length": "Keep professional emails concise:\n\n• Ideal length: 50-150 words\n• 2-3 short paragraphs maximum\n• One main point per email\n\nIf you need to share more information, consider attaching a document instead of writing a long email.\n\nRemember: Busy professionals appreciate brevity!",
+    "informal": "In professional emails, maintain a respectful tone:\n\n✓ Use: 'I would like to request...'\n✗ Avoid: 'I wanna ask...'\n\n✓ Use: 'Please let me know'\n✗ Avoid: 'Tell me'\n\nYou can be friendly without being casual. Think: respectful conversation, not text message.",
+    "close": "Professional email closings:\n\nFormal:\n• 'Best regards,'\n• 'Sincerely,'\n• 'Thank you,'\n\nSemi-formal:\n• 'Thanks,'\n• 'Regards,'\n• 'Warm regards,'\n\nAlways add your full name on the next line!",
   };
 
   const handleCheckAnswer = () => {
@@ -49,10 +49,22 @@ const LearningExperience = () => {
     setIsChecking(true);
     setTimeout(() => {
       setIsChecking(false);
-      setFeedback({
-        type: "good",
-        message: `Your answer: "${userAnswer}"\n\nThis is clear and urgent. Great job! You could also add the date to be more specific: 'Emergency Leave Request - [Date]'`,
-      });
+      
+      const hasGreeting = userAnswer.toLowerCase().includes("dear") || userAnswer.toLowerCase().includes("hello");
+      const hasClosing = userAnswer.toLowerCase().includes("regards") || userAnswer.toLowerCase().includes("thank");
+      const isPolite = userAnswer.toLowerCase().includes("please") || userAnswer.toLowerCase().includes("kindly");
+      
+      if (hasGreeting && hasClosing && isPolite) {
+        setFeedback({
+          type: "good",
+          message: `Your email body is well-structured!\n\nStrengths:\n✓ Professional greeting\n✓ Polite language\n✓ Proper closing\n\nTip: Keep it concise - aim for 2-3 short paragraphs maximum.`,
+        });
+      } else {
+        setFeedback({
+          type: "improve",
+          message: `Good start! Here's how to improve:\n\n${!hasGreeting ? "• Add a greeting (e.g., 'Dear Sir/Madam,')\n" : ""}${!isPolite ? "• Use polite words like 'please' or 'kindly'\n" : ""}${!hasClosing ? "• Add a proper closing (e.g., 'Best regards,')\n" : ""}\nTry again with these improvements!`,
+        });
+      }
     }, 1500);
   };
 
@@ -70,15 +82,15 @@ const LearningExperience = () => {
     setTimeout(() => {
       setIsTyping(false);
       
-      let response = aiResponses.default || "That's a great question! In professional emails, clarity and respect are most important. Keep your language simple, your message focused, and always proofread before sending. What specific aspect would you like to know more about?";
+      let response = "That's a great question! Professional email body should be clear, concise, and respectful. Start with a greeting, state your purpose in the first line, provide necessary details in 2-3 short paragraphs, and end with a clear closing. What specific aspect would you like help with?";
       
       const lowerMessage = messageToSend.toLowerCase();
-      if (lowerMessage.includes("urgent") || lowerMessage.includes("leave")) {
-        response = aiResponses.urgent;
-      } else if (lowerMessage.includes("boss") || lowerMessage.includes("address") || lowerMessage.includes("manager")) {
-        response = aiResponses.boss;
-      } else if (lowerMessage.includes("format") || lowerMessage.includes("example")) {
-        response = aiResponses.format;
+      if (lowerMessage.includes("length") || lowerMessage.includes("long") || lowerMessage.includes("short")) {
+        response = aiResponses.length;
+      } else if (lowerMessage.includes("informal") || lowerMessage.includes("casual") || lowerMessage.includes("friendly")) {
+        response = aiResponses.informal;
+      } else if (lowerMessage.includes("close") || lowerMessage.includes("closing") || lowerMessage.includes("end")) {
+        response = aiResponses.close;
       }
 
       setChatMessages((prev) => [
@@ -90,7 +102,7 @@ const LearningExperience = () => {
 
   return (
     <div className="flex min-h-screen bg-background">
-      {/* Sidebar - Same as Dashboard */}
+      {/* Sidebar */}
       <div className="w-[200px] border-r bg-card flex-shrink-0">
         <div className="p-6">
           <h1 className="text-2xl font-semibold text-primary mb-8 cursor-pointer" onClick={() => navigate("/dashboard")}>
@@ -106,18 +118,18 @@ const LearningExperience = () => {
           <div className="max-w-[700px]">
             {/* Progress Header */}
             <div className="mb-6">
-              <p className="text-sm text-muted-foreground mb-2">Module 2 → Lesson 3 of 12</p>
-              <h2 className="text-2xl font-semibold mb-2">Writing Professional Emails</h2>
+              <p className="text-sm text-muted-foreground mb-2">Module 2 → Lesson 4 of 12</p>
+              <h2 className="text-2xl font-semibold mb-2">Writing Professional Email Body</h2>
               <p className="text-muted-foreground mb-4">
-                Master the art of clear, professional email communication
+                Learn to structure clear and effective email content
               </p>
               <div>
                 <div className="flex justify-between text-xs mb-2">
-                  <span className="text-muted-foreground">Step 2 of 5</span>
-                  <span className="font-medium">40%</span>
+                  <span className="text-muted-foreground">Step 3 of 5</span>
+                  <span className="font-medium">60%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-secondary h-2 rounded-full" style={{ width: "40%" }} />
+                  <div className="bg-secondary h-2 rounded-full" style={{ width: "60%" }} />
                 </div>
               </div>
             </div>
@@ -129,7 +141,7 @@ const LearningExperience = () => {
                   <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                     <Play className="w-8 h-8 text-secondary-foreground ml-1" />
                   </div>
-                  <p className="text-sm font-medium">Email ka Basic Structure</p>
+                  <p className="text-sm font-medium">Email Body Structure: The 3-Part Formula</p>
                 </div>
               </div>
             </div>
@@ -137,14 +149,23 @@ const LearningExperience = () => {
             {/* Content Section */}
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold mb-4">Step 2: Writing the Subject Line</h3>
+                <h3 className="text-xl font-semibold mb-4">Step 3: The 3-Part Email Body</h3>
                 
                 <div className="bg-muted/50 rounded-lg p-6 mb-6">
-                  <p className="font-medium mb-3">A good subject line is:</p>
-                  <ul className="space-y-2 text-sm">
-                    <li>• Clear and specific</li>
-                    <li>• Under 10 words</li>
-                    <li>• States the purpose</li>
+                  <p className="font-medium mb-3">Every professional email body has 3 parts:</p>
+                  <ul className="space-y-3 text-sm">
+                    <li className="flex gap-3">
+                      <span className="font-semibold text-primary">1. Opening:</span>
+                      <span>State your purpose clearly in the first sentence</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="font-semibold text-primary">2. Details:</span>
+                      <span>Provide necessary information (2-3 short paragraphs)</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="font-semibold text-primary">3. Closing:</span>
+                      <span>End with a clear request or next step</span>
+                    </li>
                   </ul>
                 </div>
 
@@ -152,38 +173,43 @@ const LearningExperience = () => {
                   <div className="bg-error/10 border border-error/30 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <X className="w-5 h-5 text-error" />
-                      <span className="font-medium text-error">Bad Example</span>
+                      <span className="font-medium text-error">Unclear</span>
                     </div>
-                    <p className="text-sm">"Hello"</p>
+                    <p className="text-sm">"Hi, I wanted to talk about something. Can we meet?"</p>
                   </div>
 
                   <div className="bg-success/10 border border-success/30 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <CheckCircle className="w-5 h-5 text-success" />
-                      <span className="font-medium text-success">Good Example</span>
+                      <span className="font-medium text-success">Clear</span>
                     </div>
-                    <p className="text-sm">"Request for Meeting on Monday"</p>
+                    <p className="text-sm">"I would like to discuss the project timeline. Are you available tomorrow at 2 PM?"</p>
                   </div>
+                </div>
+
+                <div className="bg-primary/5 border-l-4 border-primary rounded-r-lg p-4 mb-6">
+                  <p className="text-sm font-medium mb-2">💡 Pro Tip:</p>
+                  <p className="text-sm">Busy professionals often skim emails. Put the most important information in the first line so they see it immediately!</p>
                 </div>
               </div>
 
               {/* Practice Exercise */}
               <div className="bg-card border rounded-lg p-6">
                 <h3 className="text-xl font-semibold mb-4">Practice Exercise</h3>
-                <p className="mb-4">Write a subject line for the following situation:</p>
+                <p className="mb-4">Write a complete email body for this situation:</p>
                 
                 <div className="bg-muted p-4 rounded-lg mb-4">
                   <p className="text-sm">
-                    You need to request leave from your manager for a family emergency.
+                    You need to inform your team leader that you completed the data entry task they assigned yesterday, and you're ready for the next task.
                   </p>
                 </div>
 
                 <Textarea
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
-                  placeholder="Type your subject line here..."
-                  className="mb-4"
-                  rows={2}
+                  placeholder="Dear [Name],&#10;&#10;I am writing to inform you that...&#10;&#10;Best regards,&#10;[Your Name]"
+                  className="mb-4 font-mono text-sm"
+                  rows={8}
                   disabled={isChecking || !!feedback}
                 />
 
@@ -193,7 +219,7 @@ const LearningExperience = () => {
                     disabled={!userAnswer.trim() || isChecking}
                     className="w-full"
                   >
-                    {isChecking ? "Checking..." : "Check My Answer"}
+                    {isChecking ? "Checking..." : "Check My Email"}
                   </Button>
                 )}
 
@@ -207,7 +233,7 @@ const LearningExperience = () => {
                       }`} />
                       <div className="flex-1">
                         <h4 className="font-semibold mb-2">
-                          {feedback.type === "good" ? "Good effort!" : "Let's improve this"}
+                          {feedback.type === "good" ? "Excellent work!" : "Let's improve this"}
                         </h4>
                         <p className="text-sm whitespace-pre-line">{feedback.message}</p>
                         <div className="flex gap-3 mt-4">
@@ -219,9 +245,11 @@ const LearningExperience = () => {
                               setFeedback(null);
                             }}
                           >
-                            Try Another Exercise
+                            Try Again
                           </Button>
-                          <Button size="sm">Continue to Next Step</Button>
+                          <Button size="sm" onClick={() => navigate("/dashboard")}>
+                            Continue to Dashboard
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -231,17 +259,17 @@ const LearningExperience = () => {
 
               {/* Bottom Navigation */}
               <div className="flex items-center justify-between pt-8 border-t">
-                <Button variant="outline" onClick={() => navigate("/dashboard")}>
+                <Button variant="outline" onClick={() => navigate("/learn/email-basics")}>
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Dashboard
+                  Previous Lesson
                 </Button>
-                <Button onClick={() => navigate("/learn/email-body")}>
-                  Next Lesson
+                <Button onClick={() => navigate("/dashboard")}>
+                  Back to Dashboard
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
               <p className="text-xs text-center text-muted-foreground">
-                You can move forward anytime, but practicing helps!
+                Lesson 4 completed! Continue your learning journey from the dashboard.
               </p>
             </div>
           </div>
@@ -254,7 +282,7 @@ const LearningExperience = () => {
               <MessageCircle className="w-6 h-6 text-primary" />
               <h3 className="text-xl font-semibold">Learning Assistant</h3>
             </div>
-            <p className="text-sm text-muted-foreground">Have a question? Ask anytime!</p>
+            <p className="text-sm text-muted-foreground">Ask questions about this lesson</p>
           </div>
 
           <div className="flex-1 overflow-auto p-6 space-y-4">
@@ -317,7 +345,7 @@ const LearningExperience = () => {
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleChatSubmit()}
-                placeholder="Ask about subject lines..."
+                placeholder="Ask about email body structure..."
                 className="flex-1"
               />
               <Button
@@ -335,4 +363,4 @@ const LearningExperience = () => {
   );
 };
 
-export default LearningExperience;
+export default LearningLesson2;
