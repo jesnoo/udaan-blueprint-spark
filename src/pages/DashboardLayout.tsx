@@ -24,38 +24,38 @@ const DashboardLayout = () => {
   return (
     <div className="flex min-h-screen bg-background">
       {/* Sidebar */}
-      <div className="w-[200px] border-r bg-card flex-shrink-0">
-        <div className="p-6">
-          <h1 className="text-2xl font-semibold text-primary mb-8">Udaan</h1>
+      <div className="w-[240px] border-r border-border bg-card/50 backdrop-blur-sm flex-shrink-0 flex flex-col">
+        <div className="p-6 flex-1">
+          <h1 className="text-3xl font-bold text-primary mb-12">Udaan</h1>
           
           <nav className="space-y-2">
             {navItems.map((item) => (
               <button
                 key={item.path}
                 onClick={() => navigate(item.path)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium ${
                   isActive(item.path)
-                    ? "bg-secondary text-secondary-foreground"
-                    : "hover:bg-muted"
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground hover:scale-102"
                 }`}
               >
                 <item.icon className="w-5 h-5" />
-                <span className="text-sm font-medium">{item.label}</span>
+                <span>{item.label}</span>
               </button>
             ))}
           </nav>
         </div>
 
-        <div className="absolute bottom-0 p-6 w-[200px]">
+        <div className="p-6 border-t border-border">
           <div 
-            className="flex items-center gap-3 cursor-pointer hover:bg-muted p-2 rounded-lg transition-colors"
+            className="flex items-center gap-3 cursor-pointer hover:bg-muted p-3 rounded-xl transition-all duration-200 hover:scale-102"
             onClick={() => navigate("/dashboard/profile")}
           >
-            <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center font-bold text-white text-lg shadow-lg">
               R
             </div>
             <div>
-              <p className="text-sm font-medium">Raj Kumar</p>
+              <p className="font-semibold text-foreground">Raj Kumar</p>
               <p className="text-xs text-muted-foreground">
                 View Profile
               </p>
