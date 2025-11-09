@@ -55,13 +55,13 @@ const Dashboard = () => {
                 icon={<BookOpen className="w-6 h-6" />}
                 estimatedTime="15 min remaining"
                 variant="active"
-                onClick={() => navigate("/dashboard/learning")}
+                onClick={() => navigate("/learn/email-basics")}
                 className="mb-4"
               />
               <Button 
                 size="lg" 
                 className="w-full"
-                onClick={() => navigate("/dashboard/learning")}
+                onClick={() => navigate("/learn/email-basics")}
               >
                 Continue Lesson
               </Button>
