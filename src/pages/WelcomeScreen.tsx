@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Zap, Target, TrendingUp, Award, Users, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TaraMascot } from "@/components/TaraMascot";
+import heroBackground from "@/assets/hero-background.png";
 
 const WelcomeScreen = () => {
   const navigate = useNavigate();
@@ -14,8 +15,12 @@ const WelcomeScreen = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <div className="min-h-screen flex items-center justify-center px-6 py-16 relative overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
+        {/* Background image with overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        />
+        <div className="absolute inset-0 bg-background/70" />
         
         <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10 animate-slide-up">
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-4">
