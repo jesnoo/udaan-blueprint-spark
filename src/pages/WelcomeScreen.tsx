@@ -3,6 +3,8 @@ import { Zap, Target, TrendingUp, Award, Users, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TaraMascot } from "@/components/TaraMascot";
 import heroBackground from "@/assets/hero-background.png";
+import testimonialRavi from "@/assets/testimonial-ravi.png";
+import testimonialSajid from "@/assets/testimonial-sajid.png";
 
 const WelcomeScreen = () => {
   const navigate = useNavigate();
@@ -140,6 +142,64 @@ const WelcomeScreen = () => {
           >
             Start Learning Free
           </Button>
+        </div>
+      </div>
+
+      {/* Social Proof / Testimonials Section */}
+      <div className="bg-gradient-to-br from-accent/10 via-background to-primary/5 py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-foreground mb-4">Real People. Real Progress.</h2>
+          <p className="text-lg text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
+            See how learners transformed their careers with Udaan
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Testimonial 1 - Ravi */}
+            <div className="bg-card rounded-2xl border border-border p-8 space-y-6 hover:shadow-xl transition-all duration-200">
+              <div className="flex items-start gap-4">
+                <img 
+                  src={testimonialRavi} 
+                  alt="Ravi - Decathlon Sales Assistant turned Office Admin Executive"
+                  className="w-20 h-20 rounded-full object-cover border-4 border-primary/20"
+                />
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-foreground mb-1">Ravi</h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    <span className="line-through">Decathlon Sales Assistant</span>
+                  </p>
+                  <p className="text-sm font-semibold text-primary">
+                    → Office Admin Executive
+                  </p>
+                </div>
+              </div>
+              <p className="text-muted-foreground leading-relaxed italic">
+                "Udaan helped me turn my retail experience into office skills. Now I manage reports and schedules instead of stock shelves."
+              </p>
+            </div>
+
+            {/* Testimonial 2 - Sajid */}
+            <div className="bg-card rounded-2xl border border-border p-8 space-y-6 hover:shadow-xl transition-all duration-200">
+              <div className="flex items-start gap-4">
+                <img 
+                  src={testimonialSajid} 
+                  alt="Sajid - Uber Driver turned Customer Support Associate"
+                  className="w-20 h-20 rounded-full object-cover border-4 border-primary/20"
+                />
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-foreground mb-1">Sajid</h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    <span className="line-through">Uber Driver</span>
+                  </p>
+                  <p className="text-sm font-semibold text-primary">
+                    → Customer Support Associate
+                  </p>
+                </div>
+              </div>
+              <p className="text-muted-foreground leading-relaxed italic">
+                "I never thought I'd work behind a desk. Udaan gave me the communication skills and confidence to switch careers."
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
